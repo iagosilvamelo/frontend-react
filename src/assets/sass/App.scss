@@ -1,7 +1,11 @@
 @import "resets.scss";
 @import "colors.scss";
-@import "index.scss";
+@import "header.scss";
+@import "container.scss";
+
+@import url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap');
 
 body {
 	background-color: $gray;
+	font-family: 'Ubuntu', sans-serif;
 }
