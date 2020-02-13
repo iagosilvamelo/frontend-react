@@ -1,0 +1,52 @@
+@import "../../assets/sass/colors.scss";
+
+table {
+	width: 100%;
+	border: 2px solid $grey100;
+	border-radius: 5px;
+}
+
+thead {
+	background: $grey100;
+}
+
+thead th {
+	margin: 0;
+	padding: 10px 40px;
+	text-align: left;
+}
+
+tbody tr {
+	border-bottom: 2px solid $grey100
+}
+
+tbody tr td {
+	padding: 16px 40px;
+}
+
+tfoot tr td {
+	padding: 6px 34px;
+}
+
+tfoot tr ul.pages {
+    list-style-type: none;
+    float: right
+}
+
+tfoot tr ul.pages li {
+    display: inline;
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 1px 4px;
+    cursor: pointer;
+}
+
+tfoot tr ul.pages li:hover {
+	color: $grey200
+}
+
+tfoot tr ul.pages li.active {
+    border: 2px solid $grey200;
+    border-radius: 5px;
+}
