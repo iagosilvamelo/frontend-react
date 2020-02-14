@@ -1,13 +1,10 @@
 import React from 'react'
+import logo  from '../assets/img/logo.svg'
 
-const Header = () => {
-	const logoMoovin = 'https://cdn.moovin.com.br/project/manager-panel/img/logo-moovin.png'
-
-	return (
-		<div className='Header'>
-			<img alt='Logo da Moovin' src={ logoMoovin } />
-		</div>
-	)
-}
+const Header = () => (
+	<div className='Header'>
+		<img alt='Logo da Moovin' src={ logo } />
+	</div>
+)
 
 export default Header
