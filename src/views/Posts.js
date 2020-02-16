@@ -6,23 +6,38 @@ import next  from '../assets/img/next.svg'
 export default class Posts extends Component {
 	state = {
 		posts: [],
-		meta: {}
+		meta: {},
+		api_token: ""
 	}
 
 	componentWillMount() {
+		this.setState({ api_token: process.env.REACT_APP_API_TOKEN })
+	}
+
+	componentDidMount() {
 		this.getData(1)
 	}
 
 	getData = async (page) => {
-		const endpoint = `posts?_format=json&access-token=TfUldxlrFHaqlwswhQYWBhLFFxmtS77WM66z&page=${page}`
-		const response = await api.GET(endpoint)
+		const response = await api.GET( `posts?_format=json&access-token=${this.state.api_token}&page=${page}` )
 
 		if (response._meta.success)
 			this.setState({ posts: response.result, meta: response._meta })
 	}
 
+	toPage(page) {
+		if ( page >= 1 && page <= this.state.meta.pageCount )
+			this.getData(page)
+	}
+
 	render() {
 		const { posts, meta } = this.state
+		let pages = []
+
+		for (let i = 1 ; i <= meta.pageCount; i++) {
+        	pages.push(<li onClick={ e => this.toPage({i}) } key={i}>{i}</li>)
+        }
+
 
 		return (
 			<section>
@@ -56,11 +71,7 @@ export default class Posts extends Component {
 								<td>
 									<ul className="pages">
 								        <li><img src={prev} alt="Anterior"/></li>
-
-								        { for (let i = 1 ; i <= meta.pageCount; i++) {
-								        	<li>meta.pageCount</li>
-								        } }
-
+								        { pages }
 								        <li><img src={next} alt="Próximo"/></li>
 								    </ul>
 								</td>

@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const instance = axios.create({ baseURL: "https://gorest.co.in/public-api/" })
+const instance = axios.create({ baseURL: process.env.REACT_APP_API_ENDPOINT })
 
 //
 //	Adaptei um pedaço do meu projeto com Vue
