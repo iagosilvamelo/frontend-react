@@ -51,14 +51,16 @@ export default class Posts extends Component {
 
 						<tfoot>
 							<tr>
-								<td>Exibindo 9 postagens</td>
+								<td>Exibindo { meta.perPage } postagens</td>
 								<td></td>
 								<td>
 									<ul className="pages">
 								        <li><img src={prev} alt="Anterior"/></li>
-								        <li className="active">1</li>
-								        <li>2</li>
-								        <li>3</li>
+
+								        { for (let i = 1 ; i <= meta.pageCount; i++) {
+								        	<li>meta.pageCount</li>
+								        } }
+
 								        <li><img src={next} alt="Próximo"/></li>
 								    </ul>
 								</td>
