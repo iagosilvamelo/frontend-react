@@ -25,17 +25,18 @@ export default class Posts extends Component {
 			this.setState({ posts: response.result, meta: response._meta })
 	}
 
-	toPage(page) {
-		if ( page >= 1 && page <= this.state.meta.pageCount )
-			this.getData(page)
+	toPage(payload) {
+		// console.log(payload.page)
+		if ( payload.page >= 1 && payload.page <= this.state.meta.pageCount )
+			this.getData(payload.page)
 	}
 
 	render() {
 		const { posts, meta } = this.state
 		let pages = []
 
-		for (let i = 1 ; i <= meta.pageCount; i++) {
-        	pages.push(<li onClick={ e => this.toPage({i}) } key={i}>{i}</li>)
+		for (let page = 1 ; page <= meta.pageCount; page++) {
+        	pages.push(<li onClick={ e => this.toPage({page}) } key={page}>{page}</li>)
         }
 
 
