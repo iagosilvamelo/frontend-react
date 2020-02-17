@@ -49,7 +49,8 @@ export default class Posts extends Component {
 		let pages = []
 
 		for (let page = 1 ; page <= meta.pageCount; page++) {
-        	pages.push(<li onClick={ e => this.toPage({page}) } key={page}>{page}</li>)
+
+        	pages.push(<li onClick={ e => this.toPage({page}) } className={ ( page == meta.currentPage ) ? "active" : "" } key={page}>{page}</li>)
         }
 
         pages.splice( 0, meta.currentPage - offset )
