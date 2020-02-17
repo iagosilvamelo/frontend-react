@@ -44,11 +44,16 @@ export default class Posts extends Component {
 
 	mountPagination() {
 		const { meta } = this.state
+		const range = 9
+		const offset = Math.ceil( range / 2 )
 		let pages = []
 
 		for (let page = 1 ; page <= meta.pageCount; page++) {
         	pages.push(<li onClick={ e => this.toPage({page}) } key={page}>{page}</li>)
         }
+
+        pages.splice( 0, meta.currentPage - offset )
+        pages.splice( range, meta.pageCount )
 
         return pages
 	}
