@@ -7,7 +7,8 @@ export default class Posts extends Component {
 	state = {
 		posts: [],
 		meta: {},
-		api_token: ""
+		api_token: "",
+		pages: []
 	}
 
 	componentWillMount() {
@@ -21,24 +22,40 @@ export default class Posts extends Component {
 	getData = async (page) => {
 		const response = await api.GET( `posts?_format=json&access-token=${this.state.api_token}&page=${page}` )
 
-		if (response._meta.success)
+		if (response._meta.success) {
 			this.setState({ posts: response.result, meta: response._meta })
+		}
 	}
 
 	toPage(payload) {
-		// console.log(payload.page)
 		if ( payload.page >= 1 && payload.page <= this.state.meta.pageCount )
 			this.getData(payload.page)
 	}
 
-	render() {
-		const { posts, meta } = this.state
+	prevPage() {
+		const page = this.state.meta.currentPage - 1
+		this.getData(page)
+	}
+
+	nextPage() {
+		const page = this.state.meta.currentPage + 1
+		this.getData(page)
+	}
+
+	mountPagination() {
+		const { meta } = this.state
 		let pages = []
 
 		for (let page = 1 ; page <= meta.pageCount; page++) {
         	pages.push(<li onClick={ e => this.toPage({page}) } key={page}>{page}</li>)
         }
 
+        return pages
+	}
+
+	render() {
+		const { posts, meta } = this.state
+		const pages = this.mountPagination()
 
 		return (
 			<section>
@@ -71,9 +88,9 @@ export default class Posts extends Component {
 								<td></td>
 								<td>
 									<ul className="pages">
-								        <li><img src={prev} alt="Anterior"/></li>
+								        <li><img src={prev} alt="Anterior" onClick={ e => this.prevPage() }/></li>
 								        { pages }
-								        <li><img src={next} alt="Próximo"/></li>
+								        <li><img src={next} alt="Próximo" onClick={ e => this.nextPage() }/></li>
 								    </ul>
 								</td>
 							</tr>
